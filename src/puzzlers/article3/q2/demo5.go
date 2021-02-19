@@ -2,8 +2,9 @@ package main
 
 import (
 	"flag"
-	".puzzlers/article3/q2/lib"
-	//"./lib"
+	//idea  enable go mod in
+	aa "puzzlers/src/puzzlers/article3/q2/lib"
+	//"puzzlers/article3/q2/lib"
 )
 
 var name string
@@ -14,5 +15,5 @@ func init() {
 
 func main() {
 	flag.Parse()
-	lib.Hello(name)
+	aa.Hello(name)
 }
