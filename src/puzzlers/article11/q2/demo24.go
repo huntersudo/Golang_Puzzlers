@@ -10,6 +10,12 @@ func main() {
 	example1()
 	example2()
 }
+/**
+The index: 2
+The third candidate case is selected, the element is 2.
+The candidate case is closed.
+
+ */
 
 // 示例1。
 func example1() {

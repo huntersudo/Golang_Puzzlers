@@ -8,6 +8,7 @@ import (
 type operate func(x, y int) int
 
 // 方案1。
+// 即：把函数作为一个普通的值赋给一个变量。
 func calculate(x int, y int, op operate) (int, error) {
 	if op == nil {
 		return 0, errors.New("invalid operation")
@@ -16,6 +17,7 @@ func calculate(x int, y int, op operate) (int, error) {
 }
 
 // 方案2。
+// 把其他的函数作为结果返回
 type calculateFunc func(x int, y int) (int, error)
 
 func genCalculator(op operate) calculateFunc {
@@ -29,6 +31,7 @@ func genCalculator(op operate) calculateFunc {
 
 func main() {
 	// 方案1。
+	// 即：把函数作为一个普通的值赋给一个变量。
 	x, y := 12, 23
 	op := func(x, y int) int {
 		return x + y
@@ -41,6 +44,7 @@ func main() {
 		result, err)
 
 	// 方案2。
+	// 把其他的函数作为结果返回
 	x, y = 56, 78
 	add := genCalculator(op)
 	result, err = add(x, y)

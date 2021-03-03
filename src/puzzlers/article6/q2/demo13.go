@@ -19,8 +19,8 @@ func main() {
 	fmt.Println()
 
 	// 重点2的示例。
-	fmt.Printf("The Replacement Character: %s\n", string(-1))
-	fmt.Printf("The Unicode codepoint of Replacement Character: %U\n", '�')
+	fmt.Printf("The Replacement Character: %s\n", string(-1)) /**  � */
+	fmt.Printf("The Unicode codepoint of Replacement Character: %U\n", '�') /** U+FFFD */
 	fmt.Println()
 
 	// 重点3的示例。
@@ -29,6 +29,9 @@ func main() {
 	fmt.Printf("The hex of %q: %x\n", srcStr, srcStr)
 	fmt.Printf("The byte slice of %q: % x\n", srcStr, []byte(srcStr))
 	fmt.Printf("The string: %q\n", string([]byte{'\xe4', '\xbd', '\xa0', '\xe5', '\xa5', '\xbd'}))
+	// The string: "你好"
 	fmt.Printf("The rune slice of %q: %U\n", srcStr, []rune(srcStr))
+	// The rune slice of "你好": [U+4F60 U+597D]
 	fmt.Printf("The string: %q\n", string([]rune{'\u4F60', '\u597D'}))
+	// The string: "你好"
 }

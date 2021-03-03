@@ -12,3 +12,7 @@ func main() {
 	}
 	fmt.Printf("The block is %s.\n", block)
 }
+/**
+The block is inner.
+The block is function.
+ */

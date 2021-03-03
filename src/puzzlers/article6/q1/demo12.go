@@ -18,6 +18,9 @@ func main() {
 	}
 	fmt.Printf("The element is %q. (container type: %T)\n",
 		container[1], container)
+	/**
+	The element is "one". (container type: map[int]string)
+	 */
 
 	// 方式2。
 	elem, err := getElement(container)
@@ -27,6 +30,9 @@ func main() {
 	}
 	fmt.Printf("The element is %q. (container type: %T)\n",
 		elem, container)
+	/**
+	The element is "one". (container type: map[int]string)
+	 */
 }
 
 func getElement(containerI interface{}) (elem string, err error) {

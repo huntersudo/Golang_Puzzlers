@@ -10,4 +10,5 @@ func main() {
 	elem1 := <-ch1
 	fmt.Printf("The first element received from channel ch1: %v\n",
 		elem1)
+	// The first element received from channel ch1: 2
 }
