@@ -35,6 +35,7 @@ func main() {
 	uError := underlyingError(err)
 	fmt.Printf("underlying error: %s (type: %T)\n",
 		uError, uError)
+	// underlying error: The pipe is being closed. (type: syscall.Errno)
 	fmt.Println()
 
 	// 示例2。

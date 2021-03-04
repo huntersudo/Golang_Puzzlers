@@ -49,16 +49,24 @@ func (dog Dog) Category() string {
 
 func main() {
 	petTag := PetTag{name: "little pig"}
-	_, ok := interface{}(petTag).(Named)
+	//_, ok := interface{}(petTag).(Named)
+	_, ok := (interface{}(petTag)).(Named)
+ // 类型断⾔是⼀个使⽤在接⼝值上的操作。语法上它看起来像x.(T)被称为断⾔类型，
+ // 这⾥x表示⼀个接⼝的类型和T表示⼀ 个类型。⼀个类型断⾔检查它操作对象的动态类型是否和断⾔的类型匹配。
+
 	fmt.Printf("PetTag implements interface Named: %v\n", ok)
+	// PetTag implements interface Named: true
 	dog := Dog{
 		PetTag:         petTag,
 		scientificName: "Labrador Retriever",
 	}
 	_, ok = interface{}(dog).(Animal)
 	fmt.Printf("Dog implements interface Animal: %v\n", ok)
+	// Dog implements interface Animal: true
 	_, ok = interface{}(dog).(Named)
 	fmt.Printf("Dog implements interface Named: %v\n", ok)
+	// Dog implements interface Named: true
 	_, ok = interface{}(dog).(Pet)
 	fmt.Printf("Dog implements interface Pet: %v\n", ok)
+	// Dog implements interface Pet: true
 }

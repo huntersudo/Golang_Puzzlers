@@ -9,3 +9,10 @@ func main() {
 	}
 	defer fmt.Println("last defer")
 }
+/**
+last defer
+defer in for [2]
+defer in for [1]
+defer in for [0]
+first defer
+ */

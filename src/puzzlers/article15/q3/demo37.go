@@ -28,15 +28,22 @@ func main() {
 	fmt.Printf("nameP == &(dogP.name)? %v\n",
 		nameP == &(dogP.name))
 	fmt.Printf("The name of dog is %q.\n", *nameP)
-
+/**
+  nameP == &(dogP.name)? true
+  The name of dog is "little pig".
+ */
 	*nameP = "monster"
 	fmt.Printf("The name of dog is %q.\n", dogP.name)
 	fmt.Println()
-
+/**
+  The name of dog is "monster".
+ */
 	// 示例2。
 	// 下面这种不匹配的转换虽然不会引发panic，但是其结果往往不符合预期。
 	numP := (*int)(unsafe.Pointer(namePtr))
 	num := *numP
 	fmt.Printf("This is an unexpected number: %d\n", num)
-
+/**
+  This is an unexpected number: 16576063
+ */
 }

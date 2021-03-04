@@ -10,6 +10,12 @@ func main() {
 	fmt.Printf("The modified array: %v\n", array2)
 	fmt.Printf("The original array: %v\n", array1)
 	fmt.Println()
+/**
+  The array: [a b c]
+  The modified array: [a x c]
+  The original array: [a b c]
+数组 值传递，不会修改原始数组
+ */
 
 	// 示例2。
 	slice1 := []string{"x", "y", "z"}
@@ -18,7 +24,13 @@ func main() {
 	fmt.Printf("The modified slice: %v\n", slice2)
 	fmt.Printf("The original slice: %v\n", slice1)
 	fmt.Println()
+/**
+  The slice: [x y z]
+  The modified slice: [x i z]
+  The original slice: [x i z]
+切片，切片被改变，但是原始的底层数据是不会被复制的。
 
+ */
 	// 示例3。
 	complexArray1 := [3][]string{
 		[]string{"d", "e", "f"},
@@ -30,6 +42,12 @@ func main() {
 	fmt.Printf("The modified complex array: %v\n", complexArray2)
 	fmt.Printf("The original complex array: %v\n", complexArray1)
 }
+/**
+The complex array: [[d e f] [g h i] [j k l]]
+The modified complex array: [[d e f] [g s i] [o p q]]
+The original complex array: [[d e f] [g s i] [j k l]]
+
+ */
 
 // 示例1。
 func modifyArray(a [3]string) [3]string {

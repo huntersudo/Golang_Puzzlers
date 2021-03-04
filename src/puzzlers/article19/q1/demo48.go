@@ -23,3 +23,17 @@ func caller2() {
 	_ = e5
 	fmt.Println("Exit function caller2.")
 }
+/**
+Enter function main.
+Enter function caller1.
+Enter function caller2.
+panic: runtime error: index out of range [5] with length 5
+
+goroutine 1 [running]:
+main.caller2()
+	D:/workspaces/Golang_Puzzlers/src/puzzlers/article19/q1/demo48.go:22 +0x89
+main.caller1()
+	D:/workspaces/Golang_Puzzlers/src/puzzlers/article19/q1/demo48.go:15 +0x8a
+main.main()
+	D:/workspaces/Golang_Puzzlers/src/puzzlers/article19/q1/demo48.go:9 +0x8a
+ */

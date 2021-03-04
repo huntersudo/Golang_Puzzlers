@@ -48,18 +48,25 @@ func main() {
 	// 示例1。
 	category := AnimalCategory{species: "cat"}
 	fmt.Printf("The animal category: %s\n", category)
-
+/**
+  The animal category: cat
+ */
 	// 示例2。
 	animal := Animal{
 		scientificName: "American Shorthair",
 		AnimalCategory: category,
 	}
 	fmt.Printf("The animal: %s\n", animal)
-
+/**
+  The animal: American Shorthair (category: cat)
+ */
 	// 示例3。
 	cat := Cat{
 		name:   "little pig",
 		Animal: animal,
 	}
 	fmt.Printf("The cat: %s\n", cat)
+	/**
+	The cat: American Shorthair (category: cat, name: "little pig")
+	 */
 }

@@ -24,15 +24,17 @@ func main() {
 	case value5[4], value5[5], value5[6]:
 		fmt.Println("4 or 5 or26")
 	}
+	// 把case表达式中的常量都换成了诸如value5[0]这样的索引表达式
+	// 绕过 switch的case表达式限制
 
 	// 示例3。
-	//value6 := interface{}(byte(127))
-	//switch t := value6.(type) { // 这条语句无法编译通过。
-	//case uint8, uint16:
-	//	fmt.Println("uint8 or uint16")
-	//case byte:
-	//	fmt.Printf("byte")
-	//default:
-	//	fmt.Printf("unsupported type: %T", t)
-	//}
+	value6 := interface{}(byte(127))
+	switch t := value6.(type) { // 这条语句无法编译通过。
+	case uint8, uint16:
+		fmt.Println("uint8 or uint16")
+	case byte:
+		fmt.Printf("byte")
+	default:
+		fmt.Printf("unsupported type: %T", t)
+	}
 }

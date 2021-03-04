@@ -24,4 +24,5 @@ func main() {
 	map[string]int{"the": 0, "word": 0, "counter": 0}["word"]++
 	map1 := map[string]int{"the": 0, "word": 0, "counter": 0}
 	map1["word"]++
+	// 虽然对字典字面量和字典变量索引表达式的结果值都是不可寻址的，但是这样的表达式却可以被用在自增语句和自减语句
 }
