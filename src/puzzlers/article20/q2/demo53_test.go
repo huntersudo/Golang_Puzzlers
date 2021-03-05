@@ -5,6 +5,48 @@ import (
 	"testing"
 )
 
+/***
+不要启动 gopath
+
+== t.FailNow() 调用 ，结果如下
+$ go test puzzlers/src/puzzlers/article20/q2/
+--- FAIL: TestFail (0.00s)
+FAIL
+FAIL    puzzlers/src/puzzlers/article20/q2      0.375s
+FAIL
+======================================================
+ == t.Fail() 调用 ，结果如下
+失败的测试函数中的常规测试日志一并被打印出来。
+
+$ go test puzzlers/src/puzzlers/article20/q2
+--- FAIL: TestFail (0.00s)
+demo53_test.go:62: Failed.
+FAIL
+FAIL    puzzlers/src/puzzlers/article20/q2      0.402s
+FAIL
+ */
+
+/* -v 打印常规日志
+=======================================================
+$ go test -v puzzlers/src/puzzlers/article20/q2
+=== RUN   TestHello
+--- PASS: TestHello (0.00s)
+    demo53_test.go:76: The expected greeting is "Hello, Robert!".
+=== RUN   TestIntroduce
+--- PASS: TestIntroduce (0.00s)
+    demo53_test.go:86: The expected introduce is "Welcome to my Golang column.".
+=== RUN   TestFail
+--- FAIL: TestFail (0.00s)
+    demo53_test.go:92: Failed.
+FAIL
+FAIL    puzzlers/src/puzzlers/article20/q2      3.412s
+FAIL
+
+*/
+
+/**
+go test命令就会针对每个被测代码包，依次地进行构建、执行包中符合要求的测试函数，清理临时文件，打印测试结果。
+ */
 func TestHello(t *testing.T) {
 	var name string
 	greeting, err := hello(name)
@@ -45,7 +87,8 @@ func TestIntroduce(t *testing.T) {
 }
 
 func TestFail(t *testing.T) {
-	//t.Fail()
-	t.FailNow() // 此调用会让当前的测试立即失败。
-	t.Log("Failed.")
+	t.Fail()
+	//t.FailNow() // 此调用会让当前的测试立即失败。
+	t.Log("Faileddd.")
 }
+
