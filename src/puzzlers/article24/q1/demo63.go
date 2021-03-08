@@ -10,12 +10,12 @@ func main() {
 
 	// 第二个衍生问题的示例。
 	num := uint32(18)
-	fmt.Printf("The number: %d\n", num)
+	fmt.Printf("The number: %d\n", num)  //18
 	delta := int32(-3)
 	atomic.AddUint32(&num, uint32(delta))
-	fmt.Printf("The number: %d\n", num)
+ 	fmt.Printf("The number: %d\n", num) // 15
 	atomic.AddUint32(&num, ^uint32(-(-3)-1))
-	fmt.Printf("The number: %d\n", num)
+	fmt.Printf("The number: %d\n", num) //12
 
 	fmt.Printf("The two's complement of %d: %b\n",
 		delta, uint32(delta)) // -3的补码。

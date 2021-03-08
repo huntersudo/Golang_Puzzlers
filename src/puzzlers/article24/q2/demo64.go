@@ -77,7 +77,7 @@ func main() {
 	v6 := []int{1, 2, 3}
 	fmt.Printf("Store %v to box6.\n", v6)
 	box6.Store(v6)
-	v6[1] = 4 // 注意，此处的操作不是并发安全的！
+	v6[1] = 4 //todo  注意，此处的操作不是并发安全的！
 	fmt.Printf("The value load from box6 is %v.\n", box6.Load())
 	// 正确的做法如下。
 	v6 = []int{1, 2, 3}
@@ -88,7 +88,7 @@ func main() {
 	}
 	fmt.Printf("Store %v to box6.\n", v6)
 	store(v6)
-	v6[2] = 5 // 此处的操作是安全的。
+	v6[2] = 5 //todo  此处的操作是安全的。
 	fmt.Printf("The value load from box6 is %v.\n", box6.Load())
 }
 
