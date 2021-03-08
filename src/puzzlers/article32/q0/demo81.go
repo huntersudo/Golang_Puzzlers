@@ -46,7 +46,12 @@ func main() {
 			"It returns the number of bytes copied and " +
 			"the earliest error encountered while copying.")
 	dst := new(strings.Builder)
+	// 变量src和dst的类型分别是strings.Reader和strings.Builder，
+	// 但是当它们被传到io.CopyN函数的时候，就已经分别被包装成了io.Reader类型和io.Writer类型的值。
+	// io.CopyN函数也根本不会去在意，它们的实际类型到底是什么。
 	written, err := io.CopyN(dst, src, 58)
+	// io.CopyN函数的作者通过面向接口编程，极大地拓展了它的适用范围和应用场景
+	// 换个角度看，正因为strings.Reader类型和strings.Builder类型都实现了不少接口，所以它们的值才能够被使用在更广阔的场景中。
 	if err != nil {
 		fmt.Printf("error: %v\n", err)
 	} else {

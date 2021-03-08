@@ -9,6 +9,7 @@ func main() {
 	var builder1 strings.Builder
 	builder1.Grow(1)
 
+	//todo 不能被复制
 	f1 := func(b strings.Builder) {
 		//b.Grow(1) // 这里会引发panic。
 	}
@@ -25,8 +26,9 @@ func main() {
 	_ = builder3
 
 	// 示例2。
+	// TODO 绝不共享Builder值以及它的指针值。
 	f2 := func(bp *strings.Builder) {
-		(*bp).Grow(1) // 这里虽然不会引发panic，但不是并发安全的。
+		(*bp).Grow(1) // todo 这里虽然不会引发panic，但不是并发安全的。
 		builder4 := *bp
 		//builder4.Grow(1) // 这里会引发panic。
 		_ = builder4

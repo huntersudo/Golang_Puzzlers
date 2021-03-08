@@ -7,6 +7,10 @@ import (
 	"sync"
 )
 
+
+// 今天主要提到了第一种方案，这是在编码时就完全确定键和值的类型，然后利用 Go 语言的编译器帮我们做检查。
+// todo 改进：这样做很方便，不是吗？不过，虽然方便，但是却让这样的字典类型缺少了一些灵活性。
+//  如果我们还需要一个键类型为uint32并发安全字典的话，那就不得不再如法炮制地写一遍代码了。因此，在需求多样化之后，工作量反而更大，甚至会产生很多雷同的代码。
 // IntStrMap 代表键类型为int、值类型为string的并发安全字典。
 type IntStrMap struct {
 	m sync.Map
@@ -41,13 +45,24 @@ func (iMap *IntStrMap) Store(key int, value string) {
 	iMap.m.Store(key, value)
 }
 
-// ConcurrentMap 代表可自定义键类型和值类型的并发安全字典。
+/**
+TODO 第一种方案存在一个很明显的缺陷，那就是无法灵活地改变字典的键和值的类型。
+    一旦需求出现多样化，编码的工作量就会随之而来。
+    第二种方案很好地弥补了这一缺陷，但是，那些反射操作或多或少都会降低程序的性能。
+   我们往往需要根据实际的应用场景，通过严谨且一致的测试，来获得和比较程序的各项指标，并以此作为方案选择的重要依据之一。
+ */
+
+// 在第二种方案中，我们封装的结构体类型的所有方法，都可以与sync.Map类型的方法完全一致（包括方法名称和方法签名）。
+// ConcurrentMap todo 代表可自定义键类型和值类型的并发安全字典。
 type ConcurrentMap struct {
 	m         sync.Map
 	keyType   reflect.Type
 	valueType reflect.Type
 }
+// 这两个字段的类型都是reflect.Type，我们可称之为反射类型。
 
+
+// todo  传入 key，value的类型, 初始化map
 func NewConcurrentMap(keyType, valueType reflect.Type) (*ConcurrentMap, error) {
 	if keyType == nil {
 		return nil, errors.New("nil key type")
@@ -72,11 +87,15 @@ func (cMap *ConcurrentMap) Delete(key interface{}) {
 	cMap.m.Delete(key)
 }
 
+// 在m字段的值中查找键值对
 func (cMap *ConcurrentMap) Load(key interface{}) (value interface{}, ok bool) {
 	if reflect.TypeOf(key) != cMap.keyType {
 		return
 	}
 	return cMap.m.Load(key)
+	// 我们把一个接口类型值传入reflect.TypeOf函数，就可以得到与这个值的实际类型对应的反射类型值。
+	// 因此，如果参数值的反射类型与keyType字段代表的反射类型不相等，那么我们就忽略后续操作，并直接返回。
+
 }
 
 func (cMap *ConcurrentMap) LoadOrStore(key, value interface{}) (actual interface{}, loaded bool) {
@@ -94,6 +113,8 @@ func (cMap *ConcurrentMap) Range(f func(key, value interface{}) bool) {
 	cMap.m.Range(f)
 }
 
+// 当参数key或value的实际类型不符合要求时，Store方法会立即引发 panic。
+//
 func (cMap *ConcurrentMap) Store(key, value interface{}) {
 	if reflect.TypeOf(key) != cMap.keyType {
 		panic(fmt.Errorf("wrong key type: %v", reflect.TypeOf(key)))

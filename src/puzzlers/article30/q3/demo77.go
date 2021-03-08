@@ -14,14 +14,21 @@ func main() {
 	fmt.Printf("The size of reader: %d\n", reader1.Size())
 	fmt.Printf("The reading index in reader: %d\n",
 		reader1.Size()-int64(reader1.Len()))
-
+/**
+  The size of reader: 119
+  The reading index in reader: 0
+ */
 	buf1 := make([]byte, 47)
 	n, _ := reader1.Read(buf1)
 	fmt.Printf("%d bytes were read. (call Read)\n", n)
 	fmt.Printf("The reading index in reader: %d\n",
 		reader1.Size()-int64(reader1.Len()))
 	fmt.Println()
+/**
+  47 bytes were read. (call Read)
+  The reading index in reader: 47
 
+ */
 	// 示例2。
 	buf2 := make([]byte, 21)
 	offset1 := int64(64)
@@ -30,7 +37,10 @@ func main() {
 	fmt.Printf("The reading index in reader: %d\n",
 		reader1.Size()-int64(reader1.Len()))
 	fmt.Println()
-
+/**
+  21 bytes were read. (call ReadAt, offset: 64)
+  The reading index in reader: 47
+ */
 	// 示例3。
 	offset2 := int64(17)
 	expectedIndex := reader1.Size() - int64(reader1.Len()) + offset2
@@ -43,4 +53,12 @@ func main() {
 	fmt.Printf("%d bytes were read. (call Read)\n", n)
 	fmt.Printf("The reading index in reader: %d\n",
 		reader1.Size()-int64(reader1.Len()))
+	/**
+	Seek with offset 17 and whence 1 ...
+	The reading index in reader: 64 (returned by Seek)
+	The reading index in reader: 64 (computed by me)
+	21 bytes were read. (call Read)
+	The reading index in reader: 85
+
+	*/
 }

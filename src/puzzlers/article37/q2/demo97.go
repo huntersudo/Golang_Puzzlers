@@ -4,8 +4,8 @@ import (
 	"errors"
 	"fmt"
 	"os"
-	"puzzlers/article37/common"
-	"puzzlers/article37/common/op"
+	"puzzlers/src/puzzlers/article37/common"
+	"puzzlers/src/puzzlers/article37/common/op"
 	"runtime"
 	"runtime/pprof"
 )
